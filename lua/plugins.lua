@@ -30,6 +30,15 @@ return require('packer').startup(function(use)
     -- Theme
     use "Mofiqul/dracula.nvim"
 
+    -- Status Bar
+    use {
+      "nvim-lualine/lualine.nvim",
+      config = function()
+        require("configs.lualine")
+      end
+    }
+
+
   -- My plugins here
   -- use 'foo1/bar1.nvim'
   -- use 'foo2/bar2.nvim'
