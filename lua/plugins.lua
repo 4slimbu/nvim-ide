@@ -38,10 +38,14 @@ return require('packer').startup(function(use)
       end
     }
 
+    -- Start Screen
+    use {
+      "mhinz/vim-startify",
+      config = function()
+        require("configs.vim-startify")
+      end
+    }
 
-  -- My plugins here
-  -- use 'foo1/bar1.nvim'
-  -- use 'foo2/bar2.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
