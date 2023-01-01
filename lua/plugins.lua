@@ -46,6 +46,13 @@ return require('packer').startup(function(use)
       end
     }
 
+    -- Explorer
+    use {
+      "nvim-tree/nvim-tree.lua",
+      config = function()
+        require("configs.nvim-tree")
+      end
+    }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

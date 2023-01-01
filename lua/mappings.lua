@@ -45,4 +45,16 @@ vim.api.nvim_set_keymap("n", "<leader>st", ":split term://bash | resize 20<CR>",
 vim.api.nvim_set_keymap("n", "<leader>vt", ":vsplit term://bash<CR>", opts)
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 
+-- Nvim Tree
+-- - : go to parent directory
+-- ctrl+] : go inside current directory
+-- a : create file/directory (for directory add trailing slash "/")
+-- r : rename
+-- d : delete
+-- c : copy to clipboard
+-- x : cut to clipboard
+-- p : paste
+-- s : open file/directory in file explorer
+-- g? : view all the shortcuts
+vim.api.nvim_set_keymap("n", "<leader>1", ":NvimTreeToggle<CR>", opts)
 
