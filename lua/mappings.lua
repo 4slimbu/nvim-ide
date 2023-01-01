@@ -58,3 +58,24 @@ vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 -- g? : view all the shortcuts
 vim.api.nvim_set_keymap("n", "<leader>1", ":NvimTreeToggle<CR>", opts)
 
+-- Telescope
+vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fi",
+  "<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files prompt_prefix=🔍<CR>",
+  opts
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fg",
+  "<cmd>Telescope live_grep find_command=rg,--no-ignore,--hidden,--files prompt_prefix=🔍<CR>",
+  opts
+)
+vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fr", "<cmd>lua require('telescope').extensions.neoclip.default()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>Telescope command_history<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>Telescope search_history<CR>", opts)
+-- Ctrl + P : Open projects
+
