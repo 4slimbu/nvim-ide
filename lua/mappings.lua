@@ -45,6 +45,16 @@ vim.api.nvim_set_keymap("n", "<leader>st", ":split term://bash | resize 20<CR>",
 vim.api.nvim_set_keymap("n", "<leader>vt", ":vsplit term://bash<CR>", opts)
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 
+-- Startify
+vim.api.nvim_set_keymap("n", "<leader>ss", ":Startify<CR>", opts)
+-- :SLoad    load a session
+-- :SSave    save a session
+-- :SDelete  delete a session
+-- :SClose   close current session
+
+-- Zoom Tooggle
+vim.api.nvim_set_keymap("n", "<leader>z", ":ZoomToggle<CR>", opts)
+
 -- Nvim Tree
 -- - : go to parent directory
 -- ctrl+] : go inside current directory

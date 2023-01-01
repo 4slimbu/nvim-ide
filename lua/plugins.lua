@@ -77,6 +77,40 @@ return require('packer').startup(function(use)
       end
     }
 
+    -- Nice to have plugins
+    use "ggandor/lightspeed.nvim"
+    use {
+      "karb94/neoscroll.nvim",
+      config = function()
+        require("neoscroll").setup()
+      end
+    }
+    use "andymass/vim-matchup"
+    use "markstory/vim-zoomwin"
+    use "jeffkreeftmeijer/vim-numbertoggle"
+    use "junegunn/vim-easy-align"
+    use "tpope/vim-surround"
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require("indent_blankline").setup {
+          char = "|",
+          buftype_exclude = {"terminal"}
+        }
+      end
+    }
+    use {
+      "crivotz/nvim-colorizer.lua",
+      config = function()
+        require("colorizer").setup()
+      end
+    }
+    use {
+      "windwp/nvim-autopairs",
+      config = function()
+        require("nvim-autopairs").setup({})
+      end
+    }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
