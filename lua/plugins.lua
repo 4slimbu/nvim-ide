@@ -22,7 +22,8 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+  use "wbthomason/packer.nvim"
+  use "nvim-lua/plenary.nvim"
 
     -- Icons
     use "kyazdani42/nvim-web-devicons"
@@ -55,14 +56,26 @@ return require('packer').startup(function(use)
     }
 
     -- Fuzzy Finder 
+    use "nvim-telescope/telescope.nvim"
     use {
-      "nvim-telescope/telescope.nvim",
-      requires = {{"nvim-lua/plenary.nvim"}},
+        "nvim-telescope/telescope-fzf-native.nvim", 
+        run = "make",
+        config = function()
+            require('telescope').load_extension('fzf')
+        end
+    }
+    use {
+         "nvim-telescope/telescope-project.nvim",
+         config = function()
+             require "telescope".load_extension("project")
+         end
+    }
+    use {
+      "AckslD/nvim-neoclip.lua",
       config = function()
-        require("configs.telescope")
+        require("neoclip").setup()
       end
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
 
   -- Automatically set up your configuration after cloning packer.nvim

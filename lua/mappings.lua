@@ -77,5 +77,10 @@ vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>fr", "<cmd>lua require('telescope').extensions.neoclip.default()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>Telescope command_history<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>Telescope search_history<CR>", opts)
--- Ctrl + P : Open projects
+vim.api.nvim_set_keymap(
+  "n",
+  "<C-p>",
+  ":lua require'telescope'.extensions.project.project{}<CR>",
+  {noremap = true, silent = true}
+)
 
