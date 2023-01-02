@@ -167,3 +167,19 @@ keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)
 keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
 -- Lsp Formatting
 keymap('n', '<space>f', "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+
+--------------------------------------------
+-- Commenting
+--------------------------------------------
+-- update commentstring manually
+keymap('n', '<space>c', "<cmd>lua require('ts_context_commentstring.internal').update_commentstring()<cr>", opts)
+
+--------------------------------------------
+-- Vim Test
+--------------------------------------------
+vim.api.nvim_set_keymap("n", "<leader>tn", ":TestNearest<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tf", ":TestFile<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>ts", ":TestSuite<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tl", ":TestLast<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tv", ":TestVisit<CR>", opts)
+
