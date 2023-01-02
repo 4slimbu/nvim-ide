@@ -94,3 +94,17 @@ vim.api.nvim_set_keymap(
   {noremap = true, silent = true}
 )
 
+-- Search and Replace: Quickfix
+vim.api.nvim_set_keymap("n", "<leader>gr", ":GrepperRg", opts)
+-- Using Telescope:
+-- use ,fg(my shortcut to search text in file using ripgrep) then search text in files
+-- use tab/shift+tab to select deselect items
+-- use Alt + q to add selected items to quickfix
+-- use Ctrl + q to add all items to quickfix
+-- Using GrepperRg:
+-- ,gr [textOrPatternToSearch] 
+-- files will be added automatically to quickfix
+-- use tab/shift+tab to select and zn or zN(act as not selected) to filter
+-- copen : open quickfix
+-- cdo s/pattern/replaceText/ : perform replace operation on quickfix list
+

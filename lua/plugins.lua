@@ -112,6 +112,17 @@ return require('packer').startup(function(use)
       end
     }
 
+    -- Search And Replace
+    use {"kevinhwang91/nvim-bqf", ft = "qf"}
+    -- optional
+    use {
+      "junegunn/fzf",
+      run = function()
+        vim.fn["fzf#install"]()
+      end
+    }
+    use "mhinz/vim-grepper"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
