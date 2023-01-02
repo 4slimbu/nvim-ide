@@ -108,3 +108,15 @@ vim.api.nvim_set_keymap("n", "<leader>gr", ":GrepperRg", opts)
 -- copen : open quickfix
 -- cdo s/pattern/replaceText/ : perform replace operation on quickfix list
 
+-- vim-floaterm keymap
+vim.api.nvim_set_keymap("n", "<leader>to", ":FloatermNew<CR>", opts)
+vim.api.nvim_set_keymap("t", "<leader>to", "<C-\\><C-n>:FloatermNew<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tp", ":FloatermPrev<CR>", opts)
+vim.api.nvim_set_keymap("t", "<leader>tp", "<C-\\><C-n>:FloatermPrev<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tn", ":FloatermNext<CR>", opts)
+vim.api.nvim_set_keymap("t", "<leader>tn", "<C-\\><C-n>:FloatermNext<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tt", ":FloatermToggle<CR>", opts)
+vim.api.nvim_set_keymap("t", "<leader>tt", "<C-\\><C-n>:FloatermToggle<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tk", ":FloatermKill<CR>", opts)
+vim.api.nvim_set_keymap("t", "<leader>tk", "<C-\\><C-n>:FloatermKill<CR>", opts)
+

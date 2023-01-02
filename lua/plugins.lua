@@ -123,6 +123,10 @@ return require('packer').startup(function(use)
     }
     use "mhinz/vim-grepper"
 
+    -- Terminal
+    use "voldikss/vim-floaterm"
+
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
