@@ -1,4 +1,16 @@
 ---@diagnostic disable: lowercase-global
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
 
 -- automatically run :PackerCompile whenever plugins.lua is updated
 vim.cmd([[
@@ -7,19 +19,6 @@ vim.cmd([[
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]])
-
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
-end
-
-local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use "wbthomason/packer.nvim"
@@ -133,6 +132,22 @@ return require('packer').startup(function(use)
 
     -- Editor Config
     use "editorconfig/editorconfig-vim"
+
+    -- Syntax Highlighting
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = function()
+          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+          ts_update()
+      end,
+      config = function()
+        require("configs.treesitter")
+      end
+    }
+    use "p00f/nvim-ts-rainbow"
+    use "haringsrob/nvim_context_vt"
+    use "nvim-treesitter/nvim-treesitter-textobjects"
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
