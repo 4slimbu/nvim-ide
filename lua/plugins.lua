@@ -126,6 +126,11 @@ return require('packer').startup(function(use)
     -- Terminal
     use "voldikss/vim-floaterm"
 
+    -- Git and Undo History
+    use "tpope/vim-fugitive"
+    use "airblade/vim-gitgutter"
+    use "mbbill/undotree"
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
