@@ -16,7 +16,9 @@ require("mason-lspconfig").setup({
   --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
   automatic_installation = false,
 })
-
+require("mason-nvim-dap").setup({
+    automatic_setup = true,
+})
 ----------------------------------------
 -- nvim-cmp config
 ----------------------------------------

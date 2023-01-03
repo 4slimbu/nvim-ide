@@ -102,7 +102,7 @@ keymap("n", "<leader>fs", "<cmd>Telescope search_history<CR>", opts)
 keymap(
   "n",
   "<C-p>",
-  ":lua require'telescope'.extensions.project.project{}<CR>",
+  "<cmd>:lua require'telescope'.extensions.project.project{}<CR>",
   opts
 )
 
@@ -182,4 +182,30 @@ vim.api.nvim_set_keymap("n", "<leader>tf", ":TestFile<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>ts", ":TestSuite<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>tl", ":TestLast<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>tv", ":TestVisit<CR>", opts)
+
+--------------------------------------------
+-- Nvim Dap
+--------------------------------------------
+vim.api.nvim_set_keymap("n", "<leader>dc", "<cmd>lua require 'dap'.continue()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>dsr", "<cmd>lua require 'dap'.step_over()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>dsi", "<cmd>lua require 'dap'.step_into()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>dso", "<cmd>lua require 'dap'.step_out()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>dbt", "<cmd>lua require 'dap'.toggle_breakpoint()<CR>", opts)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>dbc",
+  "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+  opts
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>dbl",
+  "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+  opts
+)
+vim.api.nvim_set_keymap("n", "<leader>dro", "<cmd>lua require'dap'.repl.open()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>drt", "<Cmd>lua require'dap'.run_last()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>duo", "<Cmd>lua require'dapui'.open()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>duc", "<Cmd>lua require'dapui'.close()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>dut", "<Cmd>lua require'dapui'.toggle()<CR>", opts)
 

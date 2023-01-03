@@ -240,6 +240,21 @@ return require("packer").startup(function(use)
     end,
   })
 
+  --------------------------------------------
+  -- Debugger: nvim-dap
+  --------------------------------------------
+  use({
+    "mfussenegger/nvim-dap",
+    requires = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "jayp0521/mason-nvim-dap.nvim"
+    },
+    config = function()
+      require("configs.nvim-dap")
+    end,
+  })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
