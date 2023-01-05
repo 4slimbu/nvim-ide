@@ -1,7 +1,25 @@
 local dap = require('dap')
-dap.set_log_level('DEBUG');
+dap.set_log_level('DEBUG')
+
 --------------------------------------------------------------
--- Adapters
+-- Dap config for lua
+--------------------------------------------------------------
+dap.configurations.lua = {
+  {
+    type = 'nlua',
+    request = 'attach',
+    name = "Attach to running Neovim instance",
+  }
+}
+
+dap.adapters.nlua = function(callback, config)
+  print('config_port')
+  print(config)
+  callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+end
+
+--------------------------------------------------------------
+-- dap config for javascript/typescript
 --------------------------------------------------------------
 -- NODE / TYPESCRIPT
 dap.adapters.node2 = {
@@ -17,9 +35,6 @@ dap.adapters.node2 = {
 --   args = { vim.fn.stdpath "data" .. '/mason/packages/chrome-debug-adapter/out/src/chromeDebug.js' };
 -- }
 
---------------------------------------------------------------
--- Configurations
---------------------------------------------------------------
 dap.configurations.javascript = {
   {
     type = 'node2';
@@ -70,6 +85,24 @@ dap.configurations.javascript = {
 --     webRoot = '${workspaceFolder}'
 --   }
 -- }
+
+--------------------------------------------------------------
+-- Dap config for php
+--------------------------------------------------------------
+dap.adapters.php = {
+  type = 'executable',
+  command = 'node',
+  args = { vim.fn.stdpath "data" .. '/mason/packages/php-debug-adapter/extension/out/phpDebug.js' }
+}
+
+dap.configurations.php = {
+  {
+    type = 'php',
+    request = 'launch',
+    name = 'Listen for Xdebug',
+    port = 9000
+  }
+}
 
 --------------------------------------------------------------
 -- Dap Virtual Text

@@ -117,7 +117,10 @@ return require("packer").startup(function(use)
       require("nvim-autopairs").setup({})
     end,
   })
-
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
   ------------------------------------------------
   -- Search And Replace
   ------------------------------------------------
@@ -243,6 +246,7 @@ return require("packer").startup(function(use)
   --------------------------------------------
   -- Debugger: nvim-dap
   --------------------------------------------
+  use "jbyuki/one-small-step-for-vimkind"
   use({
     "mfussenegger/nvim-dap",
     requires = {
