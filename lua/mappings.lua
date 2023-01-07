@@ -204,9 +204,7 @@ keymap(
   opts
 )
 keymap("n", "<leader>dro", "<cmd>lua require'dap'.repl.open()<CR>", opts)
-keymap("n", "<leader>drt", "<Cmd>lua require'dap'.run_last()<CR>", opts)
+keymap("n", "<leader>drl", "<Cmd>lua require'dap'.run_last()<CR>", opts)
 keymap("n", "<leader>duo", "<Cmd>lua require'dapui'.open()<CR>", opts)
 keymap("n", "<leader>duc", "<Cmd>lua require'dapui'.close()<CR>", opts)
 keymap("n", "<leader>dut", "<Cmd>lua require'dapui'.toggle()<CR>", opts)
-keymap('n', '<F12>', [[:lua require"dap.ui.widgets".hover()<CR>]], opts)
-keymap('n', '<F5>', [[:lua require"osv".launch({port = 8086})<CR>]], opts)
