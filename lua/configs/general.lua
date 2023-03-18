@@ -42,7 +42,7 @@ if vim.fn.has("termguicolors") == 1 then
   -- vim.go.t_8b = "[[48;2;%lu;%lu;%lum"
   vim.opt.termguicolors = true
 end
---vim.g.gruvbox_enable_italic = 1
---vim.g.gruvbox_sign_column_background = "none"
-vim.cmd "color dracula"
 
+vim.o.background = "dark" -- default is "dark" or "light" for light mode
+-- vim.cmd([[colorscheme catppuccin-latte]])
+vim.cmd([[colorscheme dracula]])

@@ -5,7 +5,7 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
   -- This setting has no relation with the `automatic_installation` setting.
-  ensure_installed = { "sumneko_lua", "tsserver", "intelephense" },
+  ensure_installed = { "lua_ls", "tsserver", "intelephense" },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -17,7 +17,7 @@ require("mason-lspconfig").setup({
   automatic_installation = false,
 })
 require("mason-nvim-dap").setup({
-    automatic_setup = true,
+  automatic_setup = true,
 })
 ----------------------------------------
 -- nvim-cmp config
@@ -68,7 +68,6 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip" }, -- For luasnip users.
-  }, {
     { name = "buffer" },
   }),
   window = {
@@ -77,7 +76,7 @@ cmp.setup({
   },
   formatting = {
     format = lspkind.cmp_format({
-      mode = "symbol", -- show only symbol annotations
+      mode = "symbol_text", -- show only symbol annotations
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
@@ -133,8 +132,8 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
   -- Next, you can provide targeted overrides for specific servers.
-  ["sumneko_lua"] = function()
-    require("lspconfig").sumneko_lua.setup({
+  ["lua_ls"] = function()
+    require("lspconfig").lua_ls.setup({
       settings = {
         Lua = {
           diagnostics = {
@@ -150,3 +149,8 @@ require("mason-lspconfig").setup_handlers({
     })
   end,
 })
+
+-- Disable particular diagnostics message for LSP
+-- vim.cmd([[
+--   let g:intelephense_diagnostics_disabled = ['MissingReturnType']
+-- ]])

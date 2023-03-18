@@ -42,12 +42,19 @@ keymap("v", ">", ">gv", opts)
 
 -- keymap for opening nvim config file
 keymap("n", "<leader>ie", ":vsp $MYVIMRC<CR>", opts)
+keymap("n", "<leader>im", ":vsp $HOME/.config/nvim/lua/mappings.lua<CR>", opts)
 
 -- Terminal keymap
 vim.cmd [[au BufEnter * if &buftype == 'terminal' | :startinsert | endif]]
 keymap("n", "<leader>st", ":split term://bash | resize 20<CR>", opts)
 keymap("n", "<leader>vt", ":vsplit term://bash<CR>", opts)
 keymap("t", "<Esc>", "<C-\\><C-n>", opts)
+
+-- Set file type as html and syntax as php for php/html file
+keymap("n", "<leader>hp", ":set filetype=html|:set syntax=php<CR>", opts)
+
+-- Clear swap
+keymap("n", "<leader>sc", ":!rm -rf ~/.local/state/nvim/swap/*", opts)
 
 --------------------------------------------
 -- Startify
@@ -91,7 +98,7 @@ keymap(
 keymap(
   "n",
   "<leader>fg",
-  "<cmd>Telescope live_grep find_command=rg,--no-ignore,--hidden,--files prompt_prefix=🔍<CR>",
+  "<cmd>Telescope live_grep prompt_prefix=🔍<CR>",
   opts
 )
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
@@ -161,8 +168,6 @@ keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
 -- Diagnostic jump can use `<c-o>` to jump back
 keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
--- Outline
-keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)
 -- Hover Doc
 keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
 -- Lsp Formatting
@@ -190,13 +195,14 @@ keymap("n", "<leader>dc", "<cmd>lua require 'dap'.continue()<CR>", opts)
 keymap("n", "<leader>dsr", "<cmd>lua require 'dap'.step_over()<CR>", opts)
 keymap("n", "<leader>dsi", "<cmd>lua require 'dap'.step_into()<CR>", opts)
 keymap("n", "<leader>dso", "<cmd>lua require 'dap'.step_out()<CR>", opts)
-keymap("n", "<leader>dbt", "<cmd>lua require 'dap'.toggle_breakpoint()<CR>", opts)
-keymap(
-  "n",
-  "<leader>dbc",
-  "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-  opts
-)
+keymap("n", "<leader>dts", "<cmd>lua require 'dap'.terminate()<CR>", opts)
+-- keymap("n", "<leader>dbt", "<cmd>lua require 'dap'.toggle_breakpoint()<CR>", opts)
+-- keymap(
+--   "n",
+--   "<leader>dbc",
+--   "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+--   opts
+-- )
 keymap(
   "n",
   "<leader>dbl",
@@ -208,3 +214,18 @@ keymap("n", "<leader>drl", "<Cmd>lua require'dap'.run_last()<CR>", opts)
 keymap("n", "<leader>duo", "<Cmd>lua require'dapui'.open()<CR>", opts)
 keymap("n", "<leader>duc", "<Cmd>lua require'dapui'.close()<CR>", opts)
 keymap("n", "<leader>dut", "<Cmd>lua require'dapui'.toggle()<CR>", opts)
+
+--------------------------------------------
+-- Persistent Breakpoint
+--------------------------------------------
+keymap("n", "<leader>dtb", "<cmd>lua require 'persistent-breakpoints.api'.toggle_breakpoint()<CR>", opts)
+keymap(
+  "n",
+  "<leader>dbc",
+  "<Cmd>lua require 'persistent-breakpoints.api'.set_conditional_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+  opts
+)
+keymap("n", "<leader>dcb", "<cmd>lua require 'persistent-breakpoints.api'.clear_all_breakpoints()<CR>", opts)
+
+-- Outline
+keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", opts)

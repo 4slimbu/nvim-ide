@@ -28,6 +28,9 @@ return require("packer").startup(function(use)
 
   -- Theme
   use("Mofiqul/dracula.nvim")
+  use({ "ellisonleao/gruvbox.nvim" })
+  use({ "catppuccin/nvim", as = "catppuccin" })
+  use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
 
   -- Status Bar
   use({
@@ -119,7 +122,9 @@ return require("packer").startup(function(use)
   })
   use({
     "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+    run = function()
+      vim.fn["mkdp#util#install"]()
+    end,
   })
   ------------------------------------------------
   -- Search And Replace
@@ -227,6 +232,15 @@ return require("packer").startup(function(use)
     },
   })
   use({
+    "rafamadriz/friendly-snippets",
+    requires = {
+      "L3MON4D3/LuaSnip",
+    },
+    config = function()
+      require("luasnip/loaders/from_vscode").lazy_load()
+    end,
+  })
+  use({
     "onsails/lspkind-nvim",
     config = function()
       require("configs.lspkind-nvim")
@@ -246,19 +260,122 @@ return require("packer").startup(function(use)
   --------------------------------------------
   -- Debugger: nvim-dap
   --------------------------------------------
-  use "jbyuki/one-small-step-for-vimkind"
+  use("jbyuki/one-small-step-for-vimkind")
   use({
     "mfussenegger/nvim-dap",
     requires = {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
-      "jayp0521/mason-nvim-dap.nvim"
+      "jayp0521/mason-nvim-dap.nvim",
     },
     config = function()
       require("configs.nvim-dap")
     end,
   })
+  use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
 
+  use("ray-x/lsp_signature.nvim")
+  use({
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      require("symbols-outline").setup()
+    end,
+  })
+  use({
+    "rest-nvim/rest.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("configs.rest")
+    end,
+  })
+  -- requires ASCII-image-convertor
+  use({
+    "samodostal/image.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  })
+  use({
+    "anuvyklack/fold-preview.nvim",
+    requires = "anuvyklack/keymap-amend.nvim",
+    config = function()
+      require("fold-preview").setup()
+    end,
+  })
+  use({
+    "Weissle/persistent-breakpoints.nvim",
+    config = function()
+      require("persistent-breakpoints").setup({
+        save_dir = vim.fn.stdpath("data") .. "/nvim_checkpoints",
+        load_breakpoints_event = { "BufReadPost" },
+        perf_record = false,
+      })
+    end,
+  })
+  -- require("neotest").setup({
+  --   adapters = {
+  --     require("neotest-python")({
+  --       dap = { justMyCode = false },
+  --     }),
+  --     require("neotest-plenary"),
+  --     require("neotest-vim-test")({
+  --       ignore_file_types = { "python", "vim", "lua" },
+  --     }),
+  --   },
+  -- })
+  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+  use({
+    "lewis6991/gitsigns.nvim",
+  })
+  use({
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  })
+  use({
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  })
+
+  use({
+    "klen/nvim-config-local",
+    config = function()
+      require("config-local").setup({
+        -- Default configuration (optional)
+        config_files = { ".vimrc.lua", ".vimrc" }, -- Config file patterns to load (lua supported)
+        hashfile = vim.fn.stdpath("data") .. "/config-local", -- Where the plugin keeps files data
+        autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
+        commands_create = true, -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
+        silent = false, -- Disable plugin messages (Config loaded/ignored)
+        lookup_parents = false, -- Lookup config files in parent directories
+      })
+    end,
+  })
+
+  -- Packer
+  use({
+    "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup({
+        -- optional configuration
+      })
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  })
+
+  -- Packer
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
