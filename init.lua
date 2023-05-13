@@ -4,4 +4,3 @@ require("plugins")
 require("configs.general")
 -- Mappings
 require("mappings")
-

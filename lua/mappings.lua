@@ -95,12 +95,7 @@ keymap(
   "<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files prompt_prefix=🔍<CR>",
   opts
 )
-keymap(
-  "n",
-  "<leader>fg",
-  "<cmd>Telescope live_grep prompt_prefix=🔍<CR>",
-  opts
-)
+keymap("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
 keymap("n", "<leader>fr", "<cmd>lua require('telescope').extensions.neoclip.default()<CR>", opts)
@@ -222,7 +217,8 @@ keymap("n", "<leader>dtb", "<cmd>lua require 'persistent-breakpoints.api'.toggle
 keymap(
   "n",
   "<leader>dbc",
-  "<Cmd>lua require 'persistent-breakpoints.api'.set_conditional_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+  "<Cmd>lua require 'persistent-breakpoints.api'.set_conditional_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>"
+  ,
   opts
 )
 keymap("n", "<leader>dcb", "<cmd>lua require 'persistent-breakpoints.api'.clear_all_breakpoints()<CR>", opts)

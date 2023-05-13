@@ -55,15 +55,18 @@ return require("packer").startup(function(use)
   ------------------------------------------------
   use({
     "nvim-tree/nvim-tree.lua",
+    requires = {
+      { "nvim-telescope/telescope.nvim" },
+    },
     config = function()
-      require("configs.nvim-tree")
+      require("configs.nvim-tree").setup()
     end,
   })
 
   ------------------------------------------------
   -- Fuzzy Finder
   ------------------------------------------------
-  use("nvim-telescope/telescope.nvim")
+  use { "nvim-telescope/telescope.nvim" }
   use({
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "make",
@@ -274,7 +277,12 @@ return require("packer").startup(function(use)
   })
   use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
 
-  use("ray-x/lsp_signature.nvim")
+  use({
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("configs.lsp-signature")
+    end
+  })
   use({
     "simrat39/symbols-outline.nvim",
     config = function()

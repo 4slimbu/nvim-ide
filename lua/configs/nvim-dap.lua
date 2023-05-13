@@ -32,7 +32,7 @@ require("dap-vscode-js").setup({
   -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
 })
 
-for _, language in ipairs({ "typescript", "javascript" }) do
+for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
   require("dap").configurations[language] = {
     {
       type = "pwa-node",
@@ -91,13 +91,24 @@ dap.adapters.php = {
 
 dap.configurations.php = {
   {
+    name = 'WordPress: Listen for Xdebug',
     type = 'php',
     request = 'launch',
-    name = 'Listen for Xdebug',
     port = 9003,
     pathMappings = {
       ['/var/www/'] = "${workspaceFolder}",
     },
+    log = true
+  },
+  {
+    name = 'Laravel: Listen for Xdebug',
+    type = 'php',
+    request = 'launch',
+    port = 9003,
+    pathMappings = {
+      ['/var/www/public_html/'] = "${workspaceFolder}",
+    },
+    log = true
   }
 }
 
@@ -204,12 +215,12 @@ require("dapui").setup({
 --------------------------------------------------------------
 -- Dap theme configuration
 ----------------------------------------------------------------
-vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg='#993939' })
-vim.api.nvim_set_hl(0, 'DapLogPoint', { fg='#61afef' })
-vim.api.nvim_set_hl(0, 'DapStopped', { fg='#98c379', bg='#31353f' })
+vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = '#993939' })
+vim.api.nvim_set_hl(0, 'DapLogPoint', { fg = '#61afef' })
+vim.api.nvim_set_hl(0, 'DapStopped', { fg = '#98c379', bg = '#31353f' })
 
-vim.fn.sign_define('DapBreakpoint', { text='', texthl='DapBreakpoint', linehl='', numhl='' })
-vim.fn.sign_define('DapBreakpointCondition', { text='ﳁ', texthl='DapBreakpoint', linehl='', numhl='' })
-vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='', numhl= '' })
-vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='', numhl= '' })
-vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = 'ﳁ', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DapLogPoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' })
