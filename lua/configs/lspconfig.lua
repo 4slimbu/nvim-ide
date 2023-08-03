@@ -5,7 +5,7 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
   -- This setting has no relation with the `automatic_installation` setting.
-  -- ensure_installed = { "lua_ls", "tsserver", "intelephense" },
+  ensure_installed = { "lua_ls", "tsserver", "intelephense" },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -76,8 +76,8 @@ cmp.setup({
   },
   formatting = {
     format = lspkind.cmp_format({
-      mode = "symbol_text", -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      mode = "symbol_text",  -- show only symbol annotations
+      maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
       -- The function below will be called before any actual modifications from lspkind
@@ -143,6 +143,24 @@ require("mason-lspconfig").setup_handlers({
             -- Make the server aware of Neovim runtime files
             library = vim.api.nvim_get_runtime_file("", true),
             checkThirdParty = false,
+          },
+        },
+      },
+    })
+  end,
+
+  ["intelephense"] = function()
+    require("lspconfig").intelephense.setup({
+      settings = {
+        intelephense = {
+          diagnostics = {
+            undefinedTypes = false,
+            undefinedFunctions = false,
+            undefinedConstants = false,
+            undefinedClassConstants = false,
+            undefinedMethods = false,
+            undefinedProperties = false,
+            undefinedVariables = true,
           },
         },
       },

@@ -46,3 +46,38 @@ end
 vim.o.background = "dark" -- default is "dark" or "light" for light mode
 -- vim.cmd([[colorscheme catppuccin-latte]])
 vim.cmd([[colorscheme dracula]])
+
+-- write with sudo even if its open in normal mode
+vim.cmd([[
+cnoremap w!! execute 'silent! write !SUDO_ASKPASS=`which ssh-askpass` sudo tee % >/dev/null' <bar> edit!
+]])
+
+-- Disable automatic indentation settings
+-- vim.opt.autoindent = false
+-- vim.opt.smartindent = false
+--
+-- Set the 'indentexpr' option to the custom expression
+-- vim.o.indentexpr = "v:lua.GetIndent()"
+
+-- Define the 'GetIndent' function to calculate indentation
+function GetIndent()
+  print("GetIndent() function called")
+  local lnum = vim.fn.prevnonblank(vim.v.lnum - 1)
+  local line = vim.fn.getline(lnum)
+  local indent = vim.fn.indent(lnum)
+  print(lnum, line, indent)
+
+  if line:match('^%s*<%?php') then
+    -- PHP opening tag, use the previous line's indentation
+    return indent
+  elseif line:match('^%s*<%?') then
+    -- Short PHP opening tag, use the previous line's indentation
+    return indent
+  elseif line:match('^%s*<%%') then
+    -- ASP-style PHP opening tag, use the previous line's indentation
+    return indent
+  else
+    -- For other lines, use the standard indentation
+    return vim.fn.indent('.')
+  end
+end

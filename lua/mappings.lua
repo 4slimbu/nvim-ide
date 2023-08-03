@@ -145,7 +145,7 @@ keymap("t", "<leader>tk", "<C-\\><C-n>:FloatermKill<CR>", opts)
 -- if there is no implement it will hide
 -- when you use action in finder like open vsplit then you can
 -- use <C-t> to jump back
-keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
+keymap("n", "gh", "<cmd>Lspsaga finder<CR>", opts)
 -- Code action
 keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
 keymap("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
