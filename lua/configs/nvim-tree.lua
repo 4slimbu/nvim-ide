@@ -176,7 +176,7 @@ function M.setup()
         profile = false
       }
     },
-    remove_keymaps = { 's' },
+    -- remove_keymaps = { 's' },
     on_attach = M.on_attach
   } -- END_DEFAULT_OPTS
 end

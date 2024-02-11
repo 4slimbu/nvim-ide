@@ -84,6 +84,7 @@ keymap("n", "<leader>z", ":ZoomToggle<CR>", opts)
 -- s : open file/directory in file explorer
 -- g? : view all the shortcuts
 keymap("n", "<leader>1", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<leader>2", ":NvimTreeFindFileToggle<CR>", opts)
 
 --------------------------------------------
 -- Telescope
@@ -225,3 +226,10 @@ keymap("n", "<leader>dcb", "<cmd>lua require 'persistent-breakpoints.api'.clear_
 
 -- Outline
 keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", opts)
+
+--------------------------------------------
+-- Rest Nvim
+--------------------------------------------
+keymap("n", "<leader>rn", "<Plug>RestNvim<CR>", opts)
+keymap("n", "<leader>rp", "<Plug>RestNvimPreview<CR>", opts)
+keymap("n", "<leader>rl", "<Plug>RestNvimLast<CR>", opts)

@@ -100,10 +100,7 @@ return require("packer").startup(function(use)
   use({
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("indent_blankline").setup({
-        char = "|",
-        buftype_exclude = { "terminal" },
-      })
+      require("ibl").setup()
     end,
   })
   use({
@@ -270,7 +267,7 @@ return require("packer").startup(function(use)
       require("configs.nvim-dap")
     end,
   })
-  use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+  -- use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
 
   use({
     "ray-x/lsp_signature.nvim",
@@ -363,20 +360,36 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- use {
+  --   "kndndrj/nvim-dbee",
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   run = function()
+  --     -- Install tries to automatically detect the install method.
+  --     -- if it fails, try calling it with one of these parameters:
+  --     --    "curl", "wget", "bitsadmin", "go"
+  --     require("dbee").install()
+  --   end,
+  --   config = function()
+  --     require("dbee").setup( --[[optional config]])
+  --   end
+  -- }
+
   -- Packer
-  use({
-    "jackMort/ChatGPT.nvim",
-    config = function()
-      require("chatgpt").setup({
-        -- optional configuration
-      })
-    end,
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  })
+  -- use({
+  --   "jackMort/ChatGPT.nvim",
+  --   config = function()
+  --     require("chatgpt").setup({
+  --       -- optional configuration
+  --     })
+  --   end,
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  -- })
 
   use({ "lambdalisue/suda.vim" })
 
