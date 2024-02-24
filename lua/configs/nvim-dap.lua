@@ -19,20 +19,19 @@ dap.adapters.nlua = function(callback, config)
 end
 
 --------------------------------------------------------------
--- dap config for javascript/typescript
+-- Dap config for Javascript
 --------------------------------------------------------------
 require("dap-vscode-js").setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-  --
-  debugger_path = vim.fn.stdpath "data" .. '/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js', -- Path to vscode-js-debug installation.
+  debugger_cmd = { vim.fn.stdpath("data") .. '/mason/packages/js-debug-adapter/js-debug-adapter' },
   -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },  -- which adapters to register in nvim-dap
+  adapters = { 'chrome', 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost', 'node', 'chrome' },
   -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
   -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
   -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
 })
 
-for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
+for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "typescriptreact" }) do
   require("dap").configurations[language] = {
     {
       type = "pwa-node",
@@ -49,33 +48,12 @@ for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
       cwd = "${workspaceFolder}",
     },
     {
-      type = "pwa-node",
+      type = "pwa-chrome",
       request = "launch",
-      name = "Debug Jest Tests",
-      -- trace = true, -- include debugger info
-      runtimeExecutable = "node",
-      runtimeArgs = {
-        "./node_modules/jest/bin/jest.js",
-        "--runInBand",
-      },
-      rootPath = "${workspaceFolder}",
-      cwd = "${workspaceFolder}",
-      console = "integratedTerminal",
-      internalConsoleOptions = "neverOpen",
-    },
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Debug Mocha Tests",
-      -- trace = true, -- include debugger info
-      runtimeExecutable = "node",
-      runtimeArgs = {
-        "./node_modules/mocha/bin/mocha",
-      },
-      rootPath = "${workspaceFolder}",
-      cwd = "${workspaceFolder}",
-      console = "integratedTerminal",
-      internalConsoleOptions = "neverOpen",
+      name = "Start Chrome with \"localhost\"",
+      url = "http://localhost:3000",
+      webRoot = "${workspaceFolder}",
+      userDataDir = "${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir"
     }
   }
 end

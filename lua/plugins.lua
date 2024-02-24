@@ -171,7 +171,12 @@ return require("packer").startup(function(use)
   ------------------------------------------------
   -- Comment
   ------------------------------------------------
-  use("JoosepAlviste/nvim-ts-context-commentstring")
+  use({
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    config = function()
+      require("configs.nvim-ts-context-commentstring")
+    end,
+  })
   use("tpope/vim-commentary")
 
   ------------------------------------------------
@@ -267,7 +272,7 @@ return require("packer").startup(function(use)
       require("configs.nvim-dap")
     end,
   })
-  -- use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
 
   use({
     "ray-x/lsp_signature.nvim",
@@ -360,21 +365,29 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- use {
-  --   "kndndrj/nvim-dbee",
-  --   requires = {
-  --     "MunifTanjim/nui.nvim",
-  --   },
-  --   run = function()
-  --     -- Install tries to automatically detect the install method.
-  --     -- if it fails, try calling it with one of these parameters:
-  --     --    "curl", "wget", "bitsadmin", "go"
-  --     require("dbee").install()
-  --   end,
-  --   config = function()
-  --     require("dbee").setup( --[[optional config]])
-  --   end
-  -- }
+  use {
+    "kndndrj/nvim-dbee",
+    requires = {
+      "MunifTanjim/nui.nvim",
+    },
+    run = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require("dbee").install()
+    end,
+    config = function()
+      require("dbee").setup( --[[optional config]])
+    end
+  }
+
+  use {
+    "tpope/vim-dadbod",
+    requires = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion"
+    }
+  }
 
   -- Packer
   -- use({
