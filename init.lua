@@ -1,3 +1,4 @@
+vim.opt.termguicolors = true
 -- Plugins
 require("plugins")
 -- Configs
