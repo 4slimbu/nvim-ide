@@ -4,8 +4,8 @@ vim.g.startify_custom_header = {}
 vim.api.nvim_exec(
   [[
     let g:startify_lists = [
-      \ { 'type': 'files',     'header': ['   MRU']            },
       \ { 'type': 'dir',       'header': ['   Current Dir '. getcwd()] },
+      \ { 'type': 'files',     'header': ['   MRU']            },
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
       \ { 'type': 'commands',  'header': ['   Commands']       },

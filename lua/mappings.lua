@@ -225,7 +225,7 @@ keymap(
 keymap("n", "<leader>dcb", "<cmd>lua require 'persistent-breakpoints.api'.clear_all_breakpoints()<CR>", opts)
 
 -- Outline
-keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", opts)
+keymap("n", "<leader>o", "<cmd>Outline<CR>", opts)
 
 --------------------------------------------
 -- Rest Nvim

@@ -110,11 +110,12 @@ require("lazy").setup({
       require("nvim-autopairs").setup({})
     end,
   },
+  -- install without yarn or npm
   {
     "iamcco/markdown-preview.nvim",
-    run = function()
-      vim.fn["mkdp#util#install"]()
-    end,
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
   },
   ------------------------------------------------
   -- Search And Replace
@@ -273,9 +274,9 @@ require("lazy").setup({
     end
   },
   {
-    "simrat39/symbols-outline.nvim",
+    "hedyhli/outline.nvim",
     config = function()
-      require("symbols-outline").setup()
+      require("configs.outline")
     end,
   },
   {
@@ -309,6 +310,7 @@ require("lazy").setup({
       })
     end,
   },
+  { "nvim-neotest/nvim-nio" },
   -- require("neotest").setup({
   --   adapters = {
   --     require("neotest-python")({

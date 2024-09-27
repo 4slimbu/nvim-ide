@@ -52,8 +52,8 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
       request = "launch",
       name = "Start Chrome with \"localhost\"",
       url = "http://localhost:3000",
+      port = 8123,
       webRoot = "${workspaceFolder}",
-      userDataDir = "${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir"
     }
   }
 end
