@@ -397,5 +397,6 @@ require("lazy").setup({
   --   },
   -- })
 
-  { "lambdalisue/suda.vim" }
+  { "lambdalisue/suda.vim" },
+  { 'mg979/vim-visual-multi', branch = 'master' }
 })
