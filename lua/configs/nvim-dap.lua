@@ -22,7 +22,7 @@ end
 -- Dap config for Javascript
 --------------------------------------------------------------
 require("dap-vscode-js").setup({
-  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+  node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
   debugger_cmd = { vim.fn.stdpath("data") .. '/mason/packages/js-debug-adapter/js-debug-adapter' },
   -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
   adapters = { 'chrome', 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost', 'node', 'chrome' },
@@ -69,6 +69,15 @@ dap.adapters.php = {
 
 dap.configurations.php = {
   {
+    name = 'Listen for Xdebug',
+    type = 'php',
+    request = 'launch',
+    port = 9003,
+    pathMappings = {
+      ['/var/www/'] = "${workspaceFolder}",
+    },
+  },
+  {
     name = 'WordPress: Listen for Xdebug',
     type = 'php',
     request = 'launch',
@@ -84,10 +93,10 @@ dap.configurations.php = {
     request = 'launch',
     port = 9003,
     pathMappings = {
-      ['/var/www/public_html/'] = "${workspaceFolder}",
+      ['/var/www/html/'] = "${workspaceFolder}",
     },
     log = true
-  }
+  },
 }
 
 --------------------------------------------------------------
@@ -117,6 +126,7 @@ require("nvim-dap-virtual-text").setup({
 --------------------------------------------------------------
 require("dapui").setup({
   icons = { expanded = "", collapsed = "", current_frame = "" },
+  force_buffers = true,
   mappings = {
     -- Use a table to apply multiple mappings
     expand = { "<CR>", "<2-LeftMouse>" },
@@ -185,6 +195,7 @@ require("dapui").setup({
   },
   windows = { indent = 1 },
   render = {
+    indent = 15,
     max_type_length = nil, -- Can be integer or nil.
     max_value_lines = 100, -- Can be integer or nil.
   },

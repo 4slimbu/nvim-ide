@@ -398,5 +398,19 @@ require("lazy").setup({
   -- })
 
   { "lambdalisue/suda.vim" },
-  { 'mg979/vim-visual-multi', branch = 'master' }
+  { 'mg979/vim-visual-multi', branch = 'master' },
+
+  {
+    "robitx/gp.nvim",
+    config = function()
+      require("configs.gp")
+    end,
+  },
+
+  {
+    "coffebar/transfer.nvim",
+    lazy = true,
+    cmd = { "TransferInit", "DiffRemote", "TransferUpload", "TransferDownload", "TransferDirDiff", "TransferRepeat" },
+    opts = {},
+  },
 })
