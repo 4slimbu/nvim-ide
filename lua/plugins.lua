@@ -73,6 +73,7 @@ require("lazy").setup({
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("live_grep_args")
       require("telescope").load_extension("project")
+      require("telescope").load_extension("remote-sshfs")
       require("neoclip").setup()
     end
   },
@@ -110,12 +111,14 @@ require("lazy").setup({
       require("nvim-autopairs").setup({})
     end,
   },
-  -- install without yarn or npm
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
     ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
   },
   ------------------------------------------------
   -- Search And Replace
@@ -413,4 +416,12 @@ require("lazy").setup({
     cmd = { "TransferInit", "DiffRemote", "TransferUpload", "TransferDownload", "TransferDirDiff", "TransferRepeat" },
     opts = {},
   },
+  {
+    "nosduco/remote-sshfs.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    opts = {
+      -- Refer to the configuration section below
+      -- or leave empty for defaults
+    },
+  }
 })

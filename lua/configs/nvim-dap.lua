@@ -1,5 +1,5 @@
 local dap = require('dap')
-dap.set_log_level('DEBUG')
+-- dap.set_log_level('DEBUG')
 
 --------------------------------------------------------------
 -- Dap config for lua
@@ -69,7 +69,7 @@ dap.adapters.php = {
 
 dap.configurations.php = {
   {
-    name = 'Listen for Xdebug',
+    name = 'Listen for Xdebug - /var/www:workspaceFolder',
     type = 'php',
     request = 'launch',
     port = 9003,
@@ -78,17 +78,7 @@ dap.configurations.php = {
     },
   },
   {
-    name = 'WordPress: Listen for Xdebug',
-    type = 'php',
-    request = 'launch',
-    port = 9003,
-    pathMappings = {
-      ['/var/www/'] = "${workspaceFolder}",
-    },
-    log = true
-  },
-  {
-    name = 'Laravel: Listen for Xdebug',
+    name = 'Listen for Xdebug - /var/www/html:workspaceFolder',
     type = 'php',
     request = 'launch',
     port = 9003,
@@ -97,6 +87,16 @@ dap.configurations.php = {
     },
     log = true
   },
+  {
+    name = 'Listen for Xdebug - /var/www:workspaceFolder/src/var/www',
+    type = 'php',
+    request = 'launch',
+    port = 9000,
+    pathMappings = {
+      ['/var/www/'] = "${workspaceFolder}/src/var/www/",
+    },
+    log = true
+  }
 }
 
 --------------------------------------------------------------
