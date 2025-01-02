@@ -1,7 +1,8 @@
 local M = {}
+local api = require('nvim-tree.api')
 
 function M.change_to_node_directory()
-  local node = require('nvim-tree.lib').get_node_at_cursor()
+  local node = api.tree.get_node_under_cursor()
   if node then
     vim.cmd('lcd ' .. node.absolute_path)
     print('Changed directory to ' .. node.absolute_path)
@@ -9,30 +10,35 @@ function M.change_to_node_directory()
 end
 
 function M.grep_at_current_tree_node()
-  local node = require('nvim-tree.lib').get_node_at_cursor()
+  -- Get the node under the cursor
+  local node = api.tree.get_node_under_cursor()
+
   if not node then
-    -- If no node is present, use the root directory
-    node = require('nvim-tree.lib').get_node_at_path(vim.fn.getcwd())
+    -- If no node is present, fallback to the root directory
+    vim.notify("No node selected. Using root directory.", vim.log.levels.INFO)
+    node = api.tree.get_root_node()
   elseif node.type == 'file' then
-    print("hello")
-    print(node.absolute_path)
-    -- If node is a file, use its parent directory
-    local dir = require('nvim-tree.lib.Dir').new(node.absolute_path):parent()
-    node = dir and dir._node or node
+    -- If the node is a file, use its parent directory
+    node = node.parent or node
   end
+
+  if not node then
+    vim.notify("Could not resolve a valid directory.", vim.log.levels.ERROR)
+    return
+  end
+
+  -- Use Telescope to live grep in the resolved directory
   require('telescope.builtin').live_grep({ search_dirs = { node.absolute_path } })
 end
 
 function M.on_attach(bufnr)
-  local api = require('nvim-tree.api')
-
   local function opts(desc)
     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
   api.config.mappings.default_on_attach(bufnr)
   vim.keymap.set('n', '<M-s>', api.node.run.system, opts('Run System'))
-  vim.keymap.set('n', '<Leader>gf', ":lua require'configs.nvim-tree'.grep_at_current_tree_node()<CR>", opts('Run System'))
+  vim.keymap.set('n', '<leader>gf', ":lua require'configs.nvim-tree'.grep_at_current_tree_node()<CR>", opts('Run System'))
   vim.keymap.set("n", "<leader>mn", require("nvim-tree.api").marks.navigate.next)
   vim.keymap.set("n", "<leader>mp", require("nvim-tree.api").marks.navigate.prev)
   vim.keymap.set("n", "<leader>ms", require("nvim-tree.api").marks.navigate.select)
